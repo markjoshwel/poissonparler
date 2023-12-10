@@ -14,19 +14,19 @@ from sys import stderr
 def randomise(sequence: str, times: int = 1) -> Generator[str, None, None]:
     randomised: set[str] = set()
 
-    # print("1", end="\r", file=stderr)
+    print("1", end="\r", file=stderr)
     all_possible_combinations: list[str] = [
         "".join(combination) for combination in permutations(sequence)
     ]
 
     # shuffle
-    # print("2", end="\r", file=stderr)
+    print("2", end="\r", file=stderr)
     while len(randomised) < len(all_possible_combinations):
-        # print(f"2: {len(randomised)}/{len(all_possible_combinations)}", end="\r", file=stderr)
+        print(f"2: {len(randomised)}/{len(all_possible_combinations)}", end="\r", file=stderr)
         randomised.add(choice(all_possible_combinations))
     
     # pick out randomised
-    # print("\n", end="", file=stderr)
+    print("\n", end="", file=stderr)
     everseen: set[str] = set()
     randomised_list: list[str] = list(randomised)
 
@@ -57,6 +57,9 @@ def main() -> None:
                         for randomised in randomise(right):
                             print(randomised)
                         continue
+
+                case [""]:
+                    continue
                 
                 case _:
                     for randomised in randomise(sequence):
